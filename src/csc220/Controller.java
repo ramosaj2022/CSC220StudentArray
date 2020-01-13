@@ -1,10 +1,13 @@
 package csc220;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 
-public class Controller
+public class Controller implements Initializable
 {
     
     //  Controls that appear in the GUI frame.
@@ -20,6 +23,12 @@ public class Controller
     {
        outputArea.setText("Button pressed");      
     
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb)
+    {
+        //  Initialization code here.
     }
 
     
