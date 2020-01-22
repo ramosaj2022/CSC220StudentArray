@@ -10,7 +10,7 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1" 
       fx:controller="csc220.Controller">
     <HBox>
-         <Button text="Run" onAction="#runButtonAction" />
+         <Button text="A" onAction="#findAs" />
     </HBox>
     <TextArea fx:id="outputArea" prefHeight="300" prefWidth="700" style="-fx-font-family: monospace;"/>
 </VBox>

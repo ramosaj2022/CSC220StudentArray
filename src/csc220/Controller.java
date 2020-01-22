@@ -14,21 +14,39 @@ public class Controller implements Initializable
     @FXML
     TextArea outputArea;
     
+    private Student[] students;
+    
 
     //  The code for readFileButtonAction only reads in the first line of actual data.
     //  Change it so that it reads in ALL the lines.
     //  You will also need to figure out how to handle lines with missing data.
     @FXML
-    private void runButtonAction(ActionEvent event) 
+    private void findAs(ActionEvent event){display('A');}
+            
+    private void display(char gradeToFind)
     {
-       outputArea.setText("Button pressed");      
-    
+       outputArea.setText("Students achieving an " + gradeToFind + "\n");
+       //  Sequential search
+       for (int i = 0; i < students.length; i += 1)
+       {
+           if (students[i].getGrade() == gradeToFind)
+           {
+               outputArea.appendText(students[i].getName() + "\n");
+           }
+       }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        //  Initialization code here.
+        //  Add some students to the array.
+        students = new Student[]
+        {
+            new Student("Edgar Rice Burroughs", 'A'),
+            new Student("Lauren Bacall", 'B'),
+            new Student("Isaac Asimov", 'B'),
+            new Student("Lena Horne", 'A'),
+        };
     }
 
     
