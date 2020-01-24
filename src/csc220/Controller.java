@@ -1,6 +1,7 @@
 package csc220;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +23,10 @@ public class Controller implements Initializable
     //  You will also need to figure out how to handle lines with missing data.
     @FXML
     private void findAs(ActionEvent event){display('A');}
+    @FXML
+    private void findBs(ActionEvent event){display('B');}
+    @FXML
+    private void findCs(ActionEvent event){display('C');}
             
     private void display(char gradeToFind)
     {
@@ -44,9 +49,13 @@ public class Controller implements Initializable
         {
             new Student("Edgar Rice Burroughs", 'A'),
             new Student("Lauren Bacall", 'B'),
+            new Student("Tony Blair", 'C'),
             new Student("Isaac Asimov", 'B'),
             new Student("Lena Horne", 'A'),
         };
+        System.out.println(Arrays.toString(students));
+        Student.sortByGrade(students);
+        System.out.println(Arrays.toString(students));
     }
 
     

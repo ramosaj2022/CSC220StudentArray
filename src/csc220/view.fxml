@@ -11,6 +11,8 @@
       fx:controller="csc220.Controller">
     <HBox>
          <Button text="A" onAction="#findAs" />
+         <Button text="B" onAction="#findBs" />
+         <Button text="C" onAction="#findCs" />
     </HBox>
     <TextArea fx:id="outputArea" prefHeight="300" prefWidth="700" style="-fx-font-family: monospace;"/>
 </VBox>
