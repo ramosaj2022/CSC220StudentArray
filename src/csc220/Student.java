@@ -26,38 +26,4 @@ public class Student
         return id + ":" + name + ":" + grade;
     }
     
-    public static void sortByGrade(Student[] arr)
-    {
-        for (int size = arr.length; size > 1; size -= 1)
-        {
-            int maxPosition = indexOfLargestByGrade(arr, size);
-            Student tmp = arr[maxPosition];
-            arr[maxPosition] = arr[size-1];
-            arr[size-1] = tmp;
-        }
-    }
-    
-    private static int indexOfLargestByGrade(Student[] arr, int size)
-    {
-        int answer = 0;
-        for (int i = 1; i < size; i += 1)
-        {
-            if (arr[i].getGrade() > arr[answer].getGrade())
-                answer = i;
-        }
-        return answer;
-    }
-    
-    public static int indexOfFirstMatchingGrade(Student[] arr)
-    {
-        for (int i = 0; i < arr.length; i += 1)
-        {
-//            if (arr[i].getGrade() = char gradeToFind)
-//                return i;
-//            if (gradeToFind < arr[i].getGrade())
-//                break;
-//        }
-        return -1;  //  Not found--return something that isn't "in range"
-    }
-    
 }
