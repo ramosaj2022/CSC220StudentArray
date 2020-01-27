@@ -48,15 +48,15 @@ public class Student
         return answer;
     }
     
-    public static int indexOfFirstMatchingGrade(Student[] arr)
+    public static int indexOfFirstMatchingGrade(Student[] arr, char gradeToFind)
     {
         for (int i = 0; i < arr.length; i += 1)
         {
-//            if (arr[i].getGrade() = char gradeToFind)
-//                return i;
-//            if (gradeToFind < arr[i].getGrade())
-//                break;
-//        }
+            if (arr[i].getGrade() == gradeToFind)
+                return i;
+            if (gradeToFind < arr[i].getGrade())
+                break;
+        }
         return -1;  //  Not found--return something that isn't "in range"
     }
     
