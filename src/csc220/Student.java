@@ -48,16 +48,32 @@ public class Student
         return answer;
     }
     
+    public static int binarySearchForGrade(Student[] arr, char gradeToFind)
+    {
+        int start = 0;
+        int end = arr.length - 1;
+        
+        while (start <= end)
+        {
+            int middle = ( start + end ) / 2; 
+            if (arr[middle].getGrade() == gradeToFind)
+                return middle;
+            else if (gradeToFind < arr[middle].getGrade() )
+                end = middle - 1;
+            else // gradeToFind > arr[middle].getGrade()
+                start = middle + 1;
+        }
+        return -1;
+    }
+    
     public static int indexOfFirstMatchingGrade(Student[] arr, char gradeToFind)
     {
-        for (int i = 0; i < arr.length; i += 1)
-        {
-            if (arr[i].getGrade() == gradeToFind)
-                return i;
-            if (gradeToFind < arr[i].getGrade())
-                break;
-        }
-        return -1;  //  Not found--return something that isn't "in range"
+        int answer = binarySearchForGrade(arr, gradeToFind);
+        
+        while (answer > 0 && arr[answer-1].getGrade() == gradeToFind)
+            answer -= 1;
+        
+        return answer;
     }
     
 }

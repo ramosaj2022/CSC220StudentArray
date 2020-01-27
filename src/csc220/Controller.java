@@ -27,17 +27,21 @@ public class Controller implements Initializable
     private void findBs(ActionEvent event){display('B');}
     @FXML
     private void findCs(ActionEvent event){display('C');}
+    @FXML
+    private void findDs(ActionEvent event){display('D');}
             
     private void display(char gradeToFind)
     {
        outputArea.setText("Students achieving an " + gradeToFind + "\n");
        //  Sequential search
-       for (int i = 0; i < students.length; i += 1)
+       int start = Student.indexOfFirstMatchingGrade(students, gradeToFind);
+       if (start < 0)  //  Grade not found
+           return;
+       for (int i = start; i < students.length; i += 1)
        {
-           if (students[i].getGrade() == gradeToFind)
-           {
-               outputArea.appendText(students[i].getName() + "\n");
-           }
+           if (students[i].getGrade() != gradeToFind)
+               return;
+            outputArea.appendText(students[i].getName() + "\n");
        }
     }
 
@@ -47,7 +51,7 @@ public class Controller implements Initializable
         //  Add some students to the array.
         students = new Student[]
         {
-            new Student("Edgar Rice Burroughs", 'A'),
+            new Student("Edgar Rice Burroughs", 'B'),
             new Student("Lauren Bacall", 'B'),
             new Student("Tony Blair", 'C'),
             new Student("Isaac Asimov", 'B'),
