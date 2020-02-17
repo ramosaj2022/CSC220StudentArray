@@ -14,6 +14,7 @@
          <Button text="B" onAction="#findBs" />
          <Button text="C" onAction="#findCs" />
          <Button text="D" onAction="#findDs" />
+         <<Button text="Search for Tony Blair" onAction="search" />
     </HBox>
     <TextArea fx:id="outputArea" prefHeight="300" prefWidth="700" style="-fx-font-family: monospace;"/>
 </VBox>

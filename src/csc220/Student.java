@@ -26,29 +26,29 @@ public class Student
         return id + ":" + name + ":" + grade;
     }
     
-    public static void sortByGrade(Student[] arr)
+    public static void sortByGrade(Student[] arr, OrderBy orderBy)
     {
         for (int size = arr.length; size > 1; size -= 1)
         {
-            int maxPosition = indexOfLargestByGrade(arr, size);
+            int maxPosition = indexOfLargestByGrade(arr, size, orderBy);
             Student tmp = arr[maxPosition];
             arr[maxPosition] = arr[size-1];
             arr[size-1] = tmp;
         }
     }
     
-    private static int indexOfLargestByGrade(Student[] arr, int size)
+    private static int indexOfLargestByGrade(Student[] arr, int size, OrderBy orderBy)
     {
         int answer = 0;
         for (int i = 1; i < size; i += 1)
         {
-            if (arr[i].getGrade() > arr[answer].getGrade())
+            if (orderBy.comesAfter(arr[i], arr[answer]))
                 answer = i;
         }
         return answer;
     }
     
-    public static int binarySearchForGrade(Student[] arr, char gradeToFind)
+    public static int binarySearchForGrade(Student[] arr, Student key, OrderBy orderBy)
     {
         int start = 0;
         int end = arr.length - 1;
@@ -56,9 +56,11 @@ public class Student
         while (start <= end)
         {
             int middle = ( start + end ) / 2; 
-            if (arr[middle].getGrade() == gradeToFind)
+//            if (arr[middle].getGrade() == gradeToFind)
+            if (orderBy.matches(arr[middle], key))
                 return middle;
-            else if (gradeToFind < arr[middle].getGrade() )
+//            else if (gradeToFind < arr[middle].getGrade() )
+            else if (orderBy.comesAfter(arr[middle], key))
                 end = middle - 1;
             else // gradeToFind > arr[middle].getGrade()
                 start = middle + 1;
@@ -66,11 +68,13 @@ public class Student
         return -1;
     }
     
-    public static int indexOfFirstMatchingGrade(Student[] arr, char gradeToFind)
+    public static int indexOfFirstMatchingGrade(Student[] arr, Student key,
+                                                OrderBy orderBy)
     {
-        int answer = binarySearchForGrade(arr, gradeToFind);
-        
-        while (answer > 0 && arr[answer-1].getGrade() == gradeToFind)
+        int answer = binarySearchForGrade(arr, key, orderBy);
+        //  Create a dummy student object to compare to.
+//        while (answer > 0 && arr[answer-1].getGrade() == gradeToFind)
+        while (answer > 0 && orderBy.matches(arr[answer-1], key))
             answer -= 1;
         
         return answer;

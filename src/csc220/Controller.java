@@ -16,6 +16,7 @@ public class Controller implements Initializable
     TextArea outputArea;
     
     private Student[] students;
+    private OrderBy orderBy;
     
 
     //  The code for readFileButtonAction only reads in the first line of actual data.
@@ -29,12 +30,20 @@ public class Controller implements Initializable
     private void findCs(ActionEvent event){display('C');}
     @FXML
     private void findDs(ActionEvent event){display('D');}
+    @FXML
+    private void search(ActionEvent event)
+    {
+        
+    }
             
     private void display(char gradeToFind)
     {
        outputArea.setText("Students achieving an " + gradeToFind + "\n");
+       
+       Student key = new Student("", gradeToFind);
+       
        //  Sequential search
-       int start = Student.indexOfFirstMatchingGrade(students, gradeToFind);
+       int start = Student.indexOfFirstMatchingGrade(students, key, orderBy);
        if (start < 0)  //  Grade not found
            return;
        for (int i = start; i < students.length; i += 1)
@@ -48,6 +57,7 @@ public class Controller implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        orderBy = new OrderBy();
         //  Add some students to the array.
         students = new Student[]
         {
@@ -58,7 +68,7 @@ public class Controller implements Initializable
             new Student("Lena Horne", 'A'),
         };
         System.out.println(Arrays.toString(students));
-        Student.sortByGrade(students);
+        Student.sortByGrade(students, orderBy);
         System.out.println(Arrays.toString(students));
     }
 
