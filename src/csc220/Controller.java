@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 public class Controller implements Initializable
 {
@@ -14,6 +15,8 @@ public class Controller implements Initializable
     //  Controls that appear in the GUI frame.
     @FXML
     TextArea outputArea;
+    @FXML
+    TextField searchForField;
     
     private Student[] students;
     private OrderByGrade orderBy;
@@ -30,10 +33,11 @@ public class Controller implements Initializable
     private void findCs(ActionEvent event){display('C');}
     @FXML
     private void findDs(ActionEvent event){display('D');}
+    
     @FXML
-    private void search(ActionEvent event)
+    private void searchForByName(ActionEvent event)
     {
-        
+        System.out.println("Search for " + searchForField.getText());
     }
             
     private void display(char gradeToFind)
