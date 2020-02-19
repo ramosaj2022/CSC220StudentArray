@@ -16,7 +16,7 @@ public class Controller implements Initializable
     TextArea outputArea;
     
     private Student[] students;
-    private OrderBy orderBy;
+    private OrderByGrade orderBy;
     
 
     //  The code for readFileButtonAction only reads in the first line of actual data.
@@ -43,7 +43,7 @@ public class Controller implements Initializable
        Student key = new Student("", gradeToFind);
        
        //  Sequential search
-       int start = Student.indexOfFirstMatchingGrade(students, key, orderBy);
+       int start = Student.indexOfFirstMatchingBy(students, key, orderBy);
        if (start < 0)  //  Grade not found
            return;
        for (int i = start; i < students.length; i += 1)
@@ -57,7 +57,7 @@ public class Controller implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        orderBy = new OrderBy();
+        orderBy = new OrderByGrade();
         //  Add some students to the array.
         students = new Student[]
         {
@@ -68,7 +68,7 @@ public class Controller implements Initializable
             new Student("Lena Horne", 'A'),
         };
         System.out.println(Arrays.toString(students));
-        Student.sortByGrade(students, orderBy);
+        Student.sortBy(students, orderBy);
         System.out.println(Arrays.toString(students));
     }
 
