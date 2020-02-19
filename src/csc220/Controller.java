@@ -18,13 +18,11 @@ public class Controller implements Initializable
     @FXML
     TextField searchForField;
     
-    private Student[] students;
-    private OrderByGrade orderBy;
+    private OrderByGrade orderByGrade;
     
-
-    //  The code for readFileButtonAction only reads in the first line of actual data.
-    //  Change it so that it reads in ALL the lines.
-    //  You will also need to figure out how to handle lines with missing data.
+    private Student[] students;
+    private Student[] orderedByGrade;
+    
     @FXML
     private void findAs(ActionEvent event){display('A');}
     @FXML
@@ -47,21 +45,21 @@ public class Controller implements Initializable
        Student key = new Student("", gradeToFind);
        
        //  Sequential search
-       int start = Student.indexOfFirstMatchingBy(students, key, orderBy);
+       int start = Student.indexOfFirstMatchingBy(orderedByGrade, key, orderByGrade);
        if (start < 0)  //  Grade not found
            return;
        for (int i = start; i < students.length; i += 1)
        {
-           if (students[i].getGrade() != gradeToFind)
+           if (orderedByGrade[i].getGrade() != gradeToFind)
                return;
-            outputArea.appendText(students[i].getName() + "\n");
+            outputArea.appendText(orderedByGrade[i].getName() + "\n");
        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        orderBy = new OrderByGrade();
+        orderByGrade = new OrderByGrade();
         //  Add some students to the array.
         students = new Student[]
         {
@@ -71,9 +69,10 @@ public class Controller implements Initializable
             new Student("Isaac Asimov", 'B'),
             new Student("Lena Horne", 'A'),
         };
-        System.out.println(Arrays.toString(students));
-        Student.sortBy(students, orderBy);
-        System.out.println(Arrays.toString(students));
+        orderedByGrade = Arrays.copyOf(students, students.length);
+        Student.sortBy(orderedByGrade, orderByGrade);
+        System.out.println("Original:         " + Arrays.toString(students));
+        System.out.println("Ordered by grade: " + Arrays.toString(orderedByGrade));
     }
 
     
