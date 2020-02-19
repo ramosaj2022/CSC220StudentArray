@@ -26,7 +26,7 @@ public class Student
         return id + ":" + name + ":" + grade;
     }
     
-    public static void sortBy(Student[] arr, OrderByGrade orderBy)
+    public static void sortBy(Student[] arr, Order orderBy)
     {
         for (int size = arr.length; size > 1; size -= 1)
         {
@@ -37,7 +37,7 @@ public class Student
         }
     }
     
-    private static int indexOfLargestBy(Student[] arr, int size, OrderByGrade orderBy)
+    private static int indexOfLargestBy(Student[] arr, int size, Order orderBy)
     {
         int answer = 0;
         for (int i = 1; i < size; i += 1)
@@ -48,7 +48,7 @@ public class Student
         return answer;
     }
     
-    public static int binarySearchBy(Student[] arr, Student key, OrderByGrade orderBy)
+    public static int binarySearchBy(Student[] arr, Student key, Order orderBy)
     {
         int start = 0;
         int end = arr.length - 1;
@@ -67,7 +67,7 @@ public class Student
     }
     
     public static int indexOfFirstMatchingBy(Student[] arr, Student key,
-                                                OrderByGrade orderBy)
+                                                Order orderBy)
     {
         int answer = binarySearchBy(arr, key, orderBy);
         while (answer > 0 && orderBy.matches(arr[answer-1], key))
