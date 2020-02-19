@@ -1,6 +1,6 @@
 package csc220;
 
-public class OrderByGrade
+public class OrderByGrade implements Order
 {
     public boolean comesAfter(Student s1, Student s2)
     {

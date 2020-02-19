@@ -19,9 +19,11 @@ public class Controller implements Initializable
     TextField searchForField;
     
     private OrderByGrade orderByGrade;
+    private OrderByName orderByName;
     
     private Student[] students;
     private Student[] orderedByGrade;
+    private Student[] orderedByName;
     
     @FXML
     private void findAs(ActionEvent event){display('A');}
@@ -36,6 +38,18 @@ public class Controller implements Initializable
     private void searchForByName(ActionEvent event)
     {
         System.out.println("Search for " + searchForField.getText());
+        String nameToFind = searchForField.getText();        
+        Student key = new Student(nameToFind, ' ');
+       
+        int start = Student.indexOfFirstMatchingBy(orderedByName, key, orderByName);
+           if (start < 0)  //  Name not found
+           return;
+       for (int i = start; i < orderedByName.length; i += 1)
+       {          
+           if (!orderedByName[i].getName().equals(key.getName()))
+               return;
+            outputArea.appendText(orderedByName[i].getName() + "\n");
+       } 
     }
             
     private void display(char gradeToFind)
@@ -60,6 +74,7 @@ public class Controller implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         orderByGrade = new OrderByGrade();
+        orderByName = new OrderByName();
         //  Add some students to the array.
         students = new Student[]
         {
@@ -71,8 +86,11 @@ public class Controller implements Initializable
         };
         orderedByGrade = Arrays.copyOf(students, students.length);
         Student.sortBy(orderedByGrade, orderByGrade);
+        orderedByName = Arrays.copyOf(students, students.length);
+        Student.sortBy(orderedByName, orderByName);
         System.out.println("Original:         " + Arrays.toString(students));
         System.out.println("Ordered by grade: " + Arrays.toString(orderedByGrade));
+        System.out.println("Ordered by name: " + Arrays.toString(orderedByName));
     }
 
     
