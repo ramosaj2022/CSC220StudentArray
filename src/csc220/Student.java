@@ -8,6 +8,13 @@ public class Student
     
     private static int nextId = 1;
     
+    public Student(int id)  //  Creates a "dummy" Student with a specific ID.
+    {
+        this.id = id;
+        this.name = "";
+        this.grade = ' ';
+    }
+    
     public Student(String name, char grade)
     {
         id = nextId;  // Automatically generate a new id for every new Student.
