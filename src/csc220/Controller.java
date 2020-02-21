@@ -20,8 +20,10 @@ public class Controller implements Initializable
     
     private OrderByGrade orderByGrade;
     private OrderByName orderByName;
+    private Order order;
     
     private Student[] students;
+    private Student[] ordered;
     private Student[] orderedByGrade;
     private Student[] orderedByName;
     
@@ -55,8 +57,21 @@ public class Controller implements Initializable
     private void searchForById(ActionEvent event)
     {
         System.out.println("Search for " + idSearchField.getText());
-    }
+        int idToFind = Integer.parseInt(idSearchField.getText());
+        Student key = new Student(idToFind);
+        
+        int start = Student.indexOfFirstMatchingBy(ordered, key, order);
+        for(int i = start; i < ordered.length; i += 1)
+        {
+            if(ordered[i].getId() == (key.getId()))
+                return;
+            outputArea.appendText(ordered[i].toString() + "\n");
             
+            
+        }    
+    }
+    
+    
     private void display(char gradeToFind)
     {
        outputArea.setText("Students achieving an " + gradeToFind + "\n");
@@ -93,6 +108,8 @@ public class Controller implements Initializable
         Student.sortBy(orderedByGrade, orderByGrade);
         orderedByName = Arrays.copyOf(students, students.length);
         Student.sortBy(orderedByName, orderByName);
+        ordered = Arrays.copyOf(students, students.length);
+        Student.sortBy(ordered, order);
         System.out.println("Original:         " + Arrays.toString(students));
         System.out.println("Ordered by grade: " + Arrays.toString(orderedByGrade));
         System.out.println("Ordered by name: " + Arrays.toString(orderedByName));
